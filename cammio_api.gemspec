@@ -13,10 +13,10 @@ OpenAPI Generator version: 4.3.0-SNAPSHOT
 =end
 
 $:.push File.expand_path("../lib", __FILE__)
-require "Cammio API/version"
+require "cammio_api/version"
 
 Gem::Specification.new do |s|
-  s.name        = "Cammio API"
+  s.name        = "cammio_api"
   s.version     = CammioAPI::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["OpenAPI-Generator"]
