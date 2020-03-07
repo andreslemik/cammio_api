@@ -40,9 +40,6 @@ Layout/EmptyLinesAroundMethodBody:
 Layout/EmptyLinesAroundModuleBody:
   Enabled: true
 
-Layout/FirstArgumentIndentation:
-  Enabled: true
-
 # Use Ruby >= 1.9 syntax for hashes. Prefer { a: :b } over { :a => :b }.
 Style/HashSyntax:
   Enabled: false
@@ -116,17 +113,9 @@ Layout/SpaceInsideParens:
 Layout/Tab:
   Enabled: true
 
-# Blank lines should not have any spaces.
-Layout/TrailingEmptyLines:
-  Enabled: true
-
 # No trailing whitespace.
 Layout/TrailingWhitespace:
   Enabled: false
-
-# Use quotes for string literals when they are enough.
-Style/RedundantPercentQ:
-  Enabled: true
 
 # Align `end` with the matching keyword or starting expression except for
 # assignments, where it should be aligned with the LHS.
