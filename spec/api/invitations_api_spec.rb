@@ -32,12 +32,12 @@ describe 'InvitationsApi' do
     end
   end
 
-  # unit tests for add_invitaion
+  # unit tests for add_invitation
   # Invite a candidate for a video interview
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [Invitation]
-  describe 'add_invitaion test' do
+  describe 'add_invitation test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
