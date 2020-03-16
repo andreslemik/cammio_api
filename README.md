@@ -152,7 +152,7 @@ Class | Method | HTTP request | Description
 *CammioAPI::InterviewsApi* | [**get_video_cv_link**](docs/InterviewsApi.md#get_video_cv_link) | **GET** /interviews/{interviewId}/video_cv | Get a video CV link
 *CammioAPI::InterviewsApi* | [**post_interview_review**](docs/InterviewsApi.md#post_interview_review) | **POST** /interviews/{interviewId}/reviews | Add a review for the interview
 *CammioAPI::InterviewsApi* | [**post_interview_reviewer**](docs/InterviewsApi.md#post_interview_reviewer) | **POST** /interviews/{interviewId}/reviewers | Invite a reviewer for the interview
-*CammioAPI::InvitationsApi* | [**add_invitaion**](docs/InvitationsApi.md#add_invitaion) | **POST** /invitations | Invite a candidate for a video interview
+*CammioAPI::InvitationsApi* | [**add_invitation**](docs/InvitationsApi.md#add_invitation) | **POST** /invitations | Invite a candidate for a video interview
 *CammioAPI::InvitationsApi* | [**delete_invitation**](docs/InvitationsApi.md#delete_invitation) | **DELETE** /invitations/{invitationId} | Delete an invitation
 *CammioAPI::InvitationsApi* | [**get_invitation_by_id**](docs/InvitationsApi.md#get_invitation_by_id) | **GET** /invitations/{invitationId} | Find an invitation by ID
 *CammioAPI::InvitationsApi* | [**get_invitations**](docs/InvitationsApi.md#get_invitations) | **GET** /invitations | Returns the list of invitations

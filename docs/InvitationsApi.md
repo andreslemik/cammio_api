@@ -4,16 +4,16 @@ All URIs are relative to *https://api.cammio.me/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_invitaion**](InvitationsApi.md#add_invitaion) | **POST** /invitations | Invite a candidate for a video interview
+[**add_invitation**](InvitationsApi.md#add_invitation) | **POST** /invitations | Invite a candidate for a video interview
 [**delete_invitation**](InvitationsApi.md#delete_invitation) | **DELETE** /invitations/{invitationId} | Delete an invitation
 [**get_invitation_by_id**](InvitationsApi.md#get_invitation_by_id) | **GET** /invitations/{invitationId} | Find an invitation by ID
 [**get_invitations**](InvitationsApi.md#get_invitations) | **GET** /invitations | Returns the list of invitations
 
 
 
-## add_invitaion
+## add_invitation
 
-> Invitation add_invitaion(body)
+> Invitation add_invitation(body)
 
 Invite a candidate for a video interview
 
@@ -37,10 +37,10 @@ body = CammioAPI::InlineObject1.new # InlineObject1 |
 
 begin
   #Invite a candidate for a video interview
-  result = api_instance.add_invitaion(body)
+  result = api_instance.add_invitation(body)
   p result
 rescue CammioAPI::ApiError => e
-  puts "Exception when calling InvitationsApi->add_invitaion: #{e}"
+  puts "Exception when calling InvitationsApi->add_invitation: #{e}"
 end
 ```
 
