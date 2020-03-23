@@ -19,51 +19,84 @@ module CammioAPI
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Returns a list of templates
-    # This resource returns a list of all available templates. 
+    # Create a video interview template
+    # With this resource you can create a video interview template. 
+    # @param title [String] 
+    # @param type [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :title Query by title
-    # @option opts [String] :language Query by language
-    # @option opts [String] :type Query by type
-    # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
-    # @option opts [Integer] :limit The numbers of items to return. (default to 10)
-    # @return [Array<Template>]
-    def get_template(opts = {})
-      data, _status_code, _headers = get_template_with_http_info(opts)
+    # @option opts [String] :language  (default to 'en')
+    # @option opts [String] :reference_id 
+    # @option opts [String] :redirect_url 
+    # @option opts [Integer] :answer_time Values are seconds  (default to 120)
+    # @option opts [Integer] :max_recordings 0 means autostart, -1 means unlimited  (default to 2)
+    # @option opts [Integer] :expires_after Values are days  (default to 14)
+    # @option opts [Integer] :data_retention Values are days  (default to 365)
+    # @option opts [Boolean] :private  (default to false)
+    # @option opts [Boolean] :continuous  (default to false)
+    # @option opts [Boolean] :prohibit_playback  (default to false)
+    # @option opts [Boolean] :allow_text_answers  (default to false)
+    # @return [Template]
+    def add_template(title, type, opts = {})
+      data, _status_code, _headers = add_template_with_http_info(title, type, opts)
       data
     end
 
-    # Returns a list of templates
-    # This resource returns a list of all available templates. 
+    # Create a video interview template
+    # With this resource you can create a video interview template. 
+    # @param title [String] 
+    # @param type [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :title Query by title
-    # @option opts [String] :language Query by language
-    # @option opts [String] :type Query by type
-    # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
-    # @option opts [Integer] :limit The numbers of items to return.
-    # @return [Array<(Array<Template>, Integer, Hash)>] Array<Template> data, response status code and response headers
-    def get_template_with_http_info(opts = {})
+    # @option opts [String] :language 
+    # @option opts [String] :reference_id 
+    # @option opts [String] :redirect_url 
+    # @option opts [Integer] :answer_time Values are seconds 
+    # @option opts [Integer] :max_recordings 0 means autostart, -1 means unlimited 
+    # @option opts [Integer] :expires_after Values are days 
+    # @option opts [Integer] :data_retention Values are days 
+    # @option opts [Boolean] :private 
+    # @option opts [Boolean] :continuous 
+    # @option opts [Boolean] :prohibit_playback 
+    # @option opts [Boolean] :allow_text_answers 
+    # @return [Array<(Template, Integer, Hash)>] Template data, response status code and response headers
+    def add_template_with_http_info(title, type, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TemplatesApi.get_template ...'
+        @api_client.config.logger.debug 'Calling API: TemplatesApi.add_template ...'
+      end
+      # verify the required parameter 'title' is set
+      if @api_client.config.client_side_validation && title.nil?
+        fail ArgumentError, "Missing the required parameter 'title' when calling TemplatesApi.add_template"
+      end
+      # verify the required parameter 'type' is set
+      if @api_client.config.client_side_validation && type.nil?
+        fail ArgumentError, "Missing the required parameter 'type' when calling TemplatesApi.add_template"
+      end
+      # verify enum value
+      allowable_values = ["automated", "live", "pitch"]
+      if @api_client.config.client_side_validation && !allowable_values.include?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
       end
       allowable_values = ["en", "de", "fr", "es", "it", "br", "nl", "fi", "tr", "pl", "ro", "ja", "zh"]
       if @api_client.config.client_side_validation && opts[:'language'] && !allowable_values.include?(opts[:'language'])
         fail ArgumentError, "invalid value for \"language\", must be one of #{allowable_values}"
       end
-      allowable_values = ["automated", "pitch", "live"]
-      if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
-        fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
+      allowable_values = [30, 60, 120, 180, 240, 300, 600]
+      if @api_client.config.client_side_validation && opts[:'answer_time'] && !allowable_values.include?(opts[:'answer_time'])
+        fail ArgumentError, "invalid value for \"answer_time\", must be one of #{allowable_values}"
       end
-      if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
-        fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling TemplatesApi.get_template, must be greater than or equal to 0.'
+      allowable_values = [-1, 0, 1, 2, 3, 4, 5]
+      if @api_client.config.client_side_validation && opts[:'max_recordings'] && !allowable_values.include?(opts[:'max_recordings'])
+        fail ArgumentError, "invalid value for \"max_recordings\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'expires_after'].nil? && opts[:'expires_after'] > 365
+        fail ArgumentError, 'invalid value for "opts[:"expires_after"]" when calling TemplatesApi.add_template, must be smaller than or equal to 365.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 50
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplatesApi.get_template, must be smaller than or equal to 50.'
+      if @api_client.config.client_side_validation && !opts[:'expires_after'].nil? && opts[:'expires_after'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"expires_after"]" when calling TemplatesApi.add_template, must be greater than or equal to 1.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplatesApi.get_template, must be greater than or equal to 1.'
+      if @api_client.config.client_side_validation && !opts[:'data_retention'].nil? && opts[:'data_retention'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"data_retention"]" when calling TemplatesApi.add_template, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -71,25 +104,35 @@ module CammioAPI
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'title'] = opts[:'title'] if !opts[:'title'].nil?
-      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
-      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
-      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
-      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data', 'application/json'])
 
       # form parameters
       form_params = opts[:form_params] || {}
+      form_params['title'] = title
+      form_params['type'] = type
+      form_params['language'] = opts[:'language'] if !opts[:'language'].nil?
+      form_params['reference_id'] = opts[:'reference_id'] if !opts[:'reference_id'].nil?
+      form_params['redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
+      form_params['answer_time'] = opts[:'answer_time'] if !opts[:'answer_time'].nil?
+      form_params['max_recordings'] = opts[:'max_recordings'] if !opts[:'max_recordings'].nil?
+      form_params['expires_after'] = opts[:'expires_after'] if !opts[:'expires_after'].nil?
+      form_params['data_retention'] = opts[:'data_retention'] if !opts[:'data_retention'].nil?
+      form_params['private'] = opts[:'private'] if !opts[:'private'].nil?
+      form_params['continuous'] = opts[:'continuous'] if !opts[:'continuous'].nil?
+      form_params['prohibit_playback'] = opts[:'prohibit_playback'] if !opts[:'prohibit_playback'].nil?
+      form_params['allow_text_answers'] = opts[:'allow_text_answers'] if !opts[:'allow_text_answers'].nil?
 
       # http body (model)
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'Array<Template>' 
+      return_type = opts[:return_type] || 'Template' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
@@ -103,9 +146,71 @@ module CammioAPI
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TemplatesApi#get_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TemplatesApi#add_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Deletes a template
+    # With this resource, you can delete a template. Only templates without invitations and interviews can be deleted 
+    # @param template_id [Integer] Template id to delete
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def delete_template(template_id, opts = {})
+      delete_template_with_http_info(template_id, opts)
+      nil
+    end
+
+    # Deletes a template
+    # With this resource, you can delete a template. Only templates without invitations and interviews can be deleted 
+    # @param template_id [Integer] Template id to delete
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_template_with_http_info(template_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TemplatesApi.delete_template ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling TemplatesApi.delete_template"
+      end
+      # resource path
+      local_var_path = '/templates/{templateId}'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TemplatesApi#delete_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -115,8 +220,8 @@ module CammioAPI
     # @param template_id [Integer] ID of template to return
     # @param [Hash] opts the optional parameters
     # @return [Template]
-    def get_template_by_id(template_id, opts = {})
-      data, _status_code, _headers = get_template_by_id_with_http_info(template_id, opts)
+    def get_template(template_id, opts = {})
+      data, _status_code, _headers = get_template_with_http_info(template_id, opts)
       data
     end
 
@@ -125,13 +230,13 @@ module CammioAPI
     # @param template_id [Integer] ID of template to return
     # @param [Hash] opts the optional parameters
     # @return [Array<(Template, Integer, Hash)>] Template data, response status code and response headers
-    def get_template_by_id_with_http_info(template_id, opts = {})
+    def get_template_with_http_info(template_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TemplatesApi.get_template_by_id ...'
+        @api_client.config.logger.debug 'Calling API: TemplatesApi.get_template ...'
       end
       # verify the required parameter 'template_id' is set
       if @api_client.config.client_side_validation && template_id.nil?
-        fail ArgumentError, "Missing the required parameter 'template_id' when calling TemplatesApi.get_template_by_id"
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling TemplatesApi.get_template"
       end
       # resource path
       local_var_path = '/templates/{templateId}'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
@@ -167,7 +272,7 @@ module CammioAPI
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TemplatesApi#get_template_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TemplatesApi#get_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -178,7 +283,7 @@ module CammioAPI
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return. (default to 10)
-    # @return [Array<Interview>]
+    # @return [Array<InlineResponse2002>]
     def get_template_interviews(template_id, opts = {})
       data, _status_code, _headers = get_template_interviews_with_http_info(template_id, opts)
       data
@@ -190,7 +295,7 @@ module CammioAPI
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return.
-    # @return [Array<(Array<Interview>, Integer, Hash)>] Array<Interview> data, response status code and response headers
+    # @return [Array<(Array<InlineResponse2002>, Integer, Hash)>] Array<InlineResponse2002> data, response status code and response headers
     def get_template_interviews_with_http_info(template_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TemplatesApi.get_template_interviews ...'
@@ -231,7 +336,7 @@ module CammioAPI
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'Array<Interview>' 
+      return_type = opts[:return_type] || 'Array<InlineResponse2002>' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
@@ -258,7 +363,7 @@ module CammioAPI
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return. (default to 10)
-    # @return [Array<Invitation>]
+    # @return [Array<InlineResponse2001>]
     def get_template_invitations(template_id, opts = {})
       data, _status_code, _headers = get_template_invitations_with_http_info(template_id, opts)
       data
@@ -270,7 +375,7 @@ module CammioAPI
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return.
-    # @return [Array<(Array<Invitation>, Integer, Hash)>] Array<Invitation> data, response status code and response headers
+    # @return [Array<(Array<InlineResponse2001>, Integer, Hash)>] Array<InlineResponse2001> data, response status code and response headers
     def get_template_invitations_with_http_info(template_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TemplatesApi.get_template_invitations ...'
@@ -311,7 +416,7 @@ module CammioAPI
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'Array<Invitation>' 
+      return_type = opts[:return_type] || 'Array<InlineResponse2001>' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
@@ -328,6 +433,345 @@ module CammioAPI
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TemplatesApi#get_template_invitations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List the killer question for this template
+    # Returns a list of killer questions for this template. 
+    # @param template_id [Integer] ID of the template
+    # @param [Hash] opts the optional parameters
+    # @return [Array<KillerQuestion>]
+    def get_template_killer_questions(template_id, opts = {})
+      data, _status_code, _headers = get_template_killer_questions_with_http_info(template_id, opts)
+      data
+    end
+
+    # List the killer question for this template
+    # Returns a list of killer questions for this template. 
+    # @param template_id [Integer] ID of the template
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<KillerQuestion>, Integer, Hash)>] Array<KillerQuestion> data, response status code and response headers
+    def get_template_killer_questions_with_http_info(template_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TemplatesApi.get_template_killer_questions ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling TemplatesApi.get_template_killer_questions"
+      end
+      # resource path
+      local_var_path = '/templates/{templateId}/killer_questions'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Array<KillerQuestion>' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TemplatesApi#get_template_killer_questions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List the question for this template
+    # Returns a list of questions for this template. 
+    # @param template_id [Integer] ID of the template
+    # @param [Hash] opts the optional parameters
+    # @return [Array<Question>]
+    def get_template_questions(template_id, opts = {})
+      data, _status_code, _headers = get_template_questions_with_http_info(template_id, opts)
+      data
+    end
+
+    # List the question for this template
+    # Returns a list of questions for this template. 
+    # @param template_id [Integer] ID of the template
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<Question>, Integer, Hash)>] Array<Question> data, response status code and response headers
+    def get_template_questions_with_http_info(template_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TemplatesApi.get_template_questions ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling TemplatesApi.get_template_questions"
+      end
+      # resource path
+      local_var_path = '/templates/{templateId}/questions'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Array<Question>' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TemplatesApi#get_template_questions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Returns a list of templates
+    # This resource returns a list of all available templates. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :title Query by title
+    # @option opts [String] :language Query by language
+    # @option opts [String] :type Query by type
+    # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
+    # @option opts [Integer] :limit The numbers of items to return. (default to 10)
+    # @return [Array<InlineResponse2004>]
+    def get_templates(opts = {})
+      data, _status_code, _headers = get_templates_with_http_info(opts)
+      data
+    end
+
+    # Returns a list of templates
+    # This resource returns a list of all available templates. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :title Query by title
+    # @option opts [String] :language Query by language
+    # @option opts [String] :type Query by type
+    # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
+    # @option opts [Integer] :limit The numbers of items to return.
+    # @return [Array<(Array<InlineResponse2004>, Integer, Hash)>] Array<InlineResponse2004> data, response status code and response headers
+    def get_templates_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TemplatesApi.get_templates ...'
+      end
+      allowable_values = ["en", "de", "fr", "es", "it", "br", "nl", "fi", "tr", "pl", "ro", "ja", "zh"]
+      if @api_client.config.client_side_validation && opts[:'language'] && !allowable_values.include?(opts[:'language'])
+        fail ArgumentError, "invalid value for \"language\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["automated", "pitch", "live"]
+      if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
+        fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling TemplatesApi.get_templates, must be greater than or equal to 0.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 50
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplatesApi.get_templates, must be smaller than or equal to 50.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplatesApi.get_templates, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/templates'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'title'] = opts[:'title'] if !opts[:'title'].nil?
+      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Array<InlineResponse2004>' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TemplatesApi#get_templates\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Edit a template by ID
+    # With this resource, you can update an existing template 
+    # @param template_id [Integer] ID of template to return
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :title 
+    # @option opts [String] :language 
+    # @option opts [String] :reference_id 
+    # @option opts [String] :redirect_url 
+    # @option opts [Integer] :answer_time Values are seconds  (default to 60)
+    # @option opts [Integer] :max_recordings 0 means autostart, -1 means unlimited  (default to 2)
+    # @option opts [Integer] :expires_after Values are days  (default to 60)
+    # @option opts [Integer] :data_retention Values are days  (default to 365)
+    # @option opts [Boolean] :private  (default to false)
+    # @option opts [Boolean] :continuous  (default to false)
+    # @option opts [Boolean] :prohibit_playback  (default to false)
+    # @option opts [Boolean] :allow_text_answers  (default to false)
+    # @return [Template]
+    def update_template(template_id, opts = {})
+      data, _status_code, _headers = update_template_with_http_info(template_id, opts)
+      data
+    end
+
+    # Edit a template by ID
+    # With this resource, you can update an existing template 
+    # @param template_id [Integer] ID of template to return
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :title 
+    # @option opts [String] :language 
+    # @option opts [String] :reference_id 
+    # @option opts [String] :redirect_url 
+    # @option opts [Integer] :answer_time Values are seconds 
+    # @option opts [Integer] :max_recordings 0 means autostart, -1 means unlimited 
+    # @option opts [Integer] :expires_after Values are days 
+    # @option opts [Integer] :data_retention Values are days 
+    # @option opts [Boolean] :private 
+    # @option opts [Boolean] :continuous 
+    # @option opts [Boolean] :prohibit_playback 
+    # @option opts [Boolean] :allow_text_answers 
+    # @return [Array<(Template, Integer, Hash)>] Template data, response status code and response headers
+    def update_template_with_http_info(template_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TemplatesApi.update_template ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling TemplatesApi.update_template"
+      end
+      allowable_values = ["en", "de", "fr", "es", "it", "br", "nl", "fi", "tr", "pl", "ro", "ja", "zh"]
+      if @api_client.config.client_side_validation && opts[:'language'] && !allowable_values.include?(opts[:'language'])
+        fail ArgumentError, "invalid value for \"language\", must be one of #{allowable_values}"
+      end
+      allowable_values = [30, 60, 120, 180, 240, 300, 600]
+      if @api_client.config.client_side_validation && opts[:'answer_time'] && !allowable_values.include?(opts[:'answer_time'])
+        fail ArgumentError, "invalid value for \"answer_time\", must be one of #{allowable_values}"
+      end
+      allowable_values = [-1, 0, 1, 2, 3, 4, 5]
+      if @api_client.config.client_side_validation && opts[:'max_recordings'] && !allowable_values.include?(opts[:'max_recordings'])
+        fail ArgumentError, "invalid value for \"max_recordings\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'expires_after'].nil? && opts[:'expires_after'] > 365
+        fail ArgumentError, 'invalid value for "opts[:"expires_after"]" when calling TemplatesApi.update_template, must be smaller than or equal to 365.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'expires_after'].nil? && opts[:'expires_after'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"expires_after"]" when calling TemplatesApi.update_template, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'data_retention'].nil? && opts[:'data_retention'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"data_retention"]" when calling TemplatesApi.update_template, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/templates/{templateId}'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data', 'application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['title'] = opts[:'title'] if !opts[:'title'].nil?
+      form_params['language'] = opts[:'language'] if !opts[:'language'].nil?
+      form_params['reference_id'] = opts[:'reference_id'] if !opts[:'reference_id'].nil?
+      form_params['redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
+      form_params['answer_time'] = opts[:'answer_time'] if !opts[:'answer_time'].nil?
+      form_params['max_recordings'] = opts[:'max_recordings'] if !opts[:'max_recordings'].nil?
+      form_params['expires_after'] = opts[:'expires_after'] if !opts[:'expires_after'].nil?
+      form_params['data_retention'] = opts[:'data_retention'] if !opts[:'data_retention'].nil?
+      form_params['private'] = opts[:'private'] if !opts[:'private'].nil?
+      form_params['continuous'] = opts[:'continuous'] if !opts[:'continuous'].nil?
+      form_params['prohibit_playback'] = opts[:'prohibit_playback'] if !opts[:'prohibit_playback'].nil?
+      form_params['allow_text_answers'] = opts[:'allow_text_answers'] if !opts[:'allow_text_answers'].nil?
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Template' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TemplatesApi#update_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

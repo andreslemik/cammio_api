@@ -20,7 +20,7 @@ This resource returns the statistics of the account
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth

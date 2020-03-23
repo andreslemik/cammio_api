@@ -21,7 +21,7 @@ This resource returns the details of a pitch.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -77,7 +77,7 @@ This resource returns a list of all pitches.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth

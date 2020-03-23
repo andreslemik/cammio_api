@@ -22,7 +22,7 @@ This resource returns a list of all published Stories.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -90,7 +90,7 @@ This resource returns the details of a specific Story.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -146,7 +146,7 @@ Get the embed code for the story. This code can be used to add a story to a web 
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth

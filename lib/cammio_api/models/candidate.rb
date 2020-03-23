@@ -15,13 +15,13 @@ require 'date'
 module CammioAPI
   # Describes the person being inivited for, or having completed a video interview. 
   class Candidate
-    attr_accessor :gender
-
     attr_accessor :firstname
 
     attr_accessor :lastname
 
     attr_accessor :email
+
+    attr_accessor :gender
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -48,20 +48,20 @@ module CammioAPI
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'gender' => :'gender',
         :'firstname' => :'firstname',
         :'lastname' => :'lastname',
-        :'email' => :'email'
+        :'email' => :'email',
+        :'gender' => :'gender'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'gender' => :'String',
         :'firstname' => :'String',
         :'lastname' => :'String',
-        :'email' => :'String'
+        :'email' => :'String',
+        :'gender' => :'String'
       }
     end
 
@@ -86,10 +86,6 @@ module CammioAPI
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'gender')
-        self.gender = attributes[:'gender']
-      end
-
       if attributes.key?(:'firstname')
         self.firstname = attributes[:'firstname']
       end
@@ -100,6 +96,10 @@ module CammioAPI
 
       if attributes.key?(:'email')
         self.email = attributes[:'email']
+      end
+
+      if attributes.key?(:'gender')
+        self.gender = attributes[:'gender']
       end
     end
 
@@ -125,11 +125,11 @@ module CammioAPI
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      gender_validator = EnumAttributeValidator.new('String', ["male", "female"])
-      return false unless gender_validator.valid?(@gender)
       return false if @firstname.nil?
       return false if @lastname.nil?
       return false if @email.nil?
+      gender_validator = EnumAttributeValidator.new('String', ["male", "female"])
+      return false unless gender_validator.valid?(@gender)
       true
     end
 
@@ -148,10 +148,10 @@ module CammioAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          gender == o.gender &&
           firstname == o.firstname &&
           lastname == o.lastname &&
-          email == o.email
+          email == o.email &&
+          gender == o.gender
     end
 
     # @see the `==` method
@@ -163,7 +163,7 @@ module CammioAPI
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [gender, firstname, lastname, email].hash
+      [firstname, lastname, email, gender].hash
     end
 
     # Builds the object from hash

@@ -672,7 +672,7 @@ module CammioAPI
     # @option opts [String] :email Query by email
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return. (default to 10)
-    # @return [Array<InlineResponse2001>]
+    # @return [Array<InlineResponse2002>]
     def get_interviews(opts = {})
       data, _status_code, _headers = get_interviews_with_http_info(opts)
       data
@@ -687,7 +687,7 @@ module CammioAPI
     # @option opts [String] :email Query by email
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return.
-    # @return [Array<(Array<InlineResponse2001>, Integer, Hash)>] Array<InlineResponse2001> data, response status code and response headers
+    # @return [Array<(Array<InlineResponse2002>, Integer, Hash)>] Array<InlineResponse2002> data, response status code and response headers
     def get_interviews_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InterviewsApi.get_interviews ...'
@@ -728,7 +728,7 @@ module CammioAPI
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'Array<InlineResponse2001>' 
+      return_type = opts[:return_type] || 'Array<InlineResponse2002>' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']
@@ -753,7 +753,7 @@ module CammioAPI
     # Get a video CV link for a completed interview. This link to the video interview is valid only 3 times and must be consumed within 3 days after which the link expires. 
     # @param interview_id [Integer] ID of the interview
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse2002]
+    # @return [InlineResponse2003]
     def get_video_cv_link(interview_id, opts = {})
       data, _status_code, _headers = get_video_cv_link_with_http_info(interview_id, opts)
       data
@@ -763,7 +763,7 @@ module CammioAPI
     # Get a video CV link for a completed interview. This link to the video interview is valid only 3 times and must be consumed within 3 days after which the link expires. 
     # @param interview_id [Integer] ID of the interview
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
+    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
     def get_video_cv_link_with_http_info(interview_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InterviewsApi.get_video_cv_link ...'
@@ -790,7 +790,7 @@ module CammioAPI
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2002' 
+      return_type = opts[:return_type] || 'InlineResponse2003' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']

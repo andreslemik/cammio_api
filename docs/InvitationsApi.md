@@ -4,24 +4,26 @@ All URIs are relative to *https://api.cammio.me/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_invitation**](InvitationsApi.md#add_invitation) | **POST** /invitations | Invite a candidate for a video interview
+[**add_invitaion**](InvitationsApi.md#add_invitaion) | **POST** /invitations | Invite a candidate for a video interview
 [**delete_invitation**](InvitationsApi.md#delete_invitation) | **DELETE** /invitations/{invitationId} | Delete an invitation
 [**get_invitation_by_id**](InvitationsApi.md#get_invitation_by_id) | **GET** /invitations/{invitationId} | Find an invitation by ID
 [**get_invitations**](InvitationsApi.md#get_invitations) | **GET** /invitations | Returns the list of invitations
 
 
 
-## add_invitation
+## add_invitaion
 
-> Invitation add_invitation(body)
+> Invitation add_invitaion(body)
 
 Invite a candidate for a video interview
+
+With this resource you can invite a candidate for a video interview by posting a message body. The response contains the URL to start the interview. You may set any number of **callback params**, but this is not required. Callback params are used upon notifying an external system, and can hold any kind of information, for example the ID of an external job application. 
 
 ### Example
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -37,10 +39,10 @@ body = CammioAPI::InlineObject1.new # InlineObject1 |
 
 begin
   #Invite a candidate for a video interview
-  result = api_instance.add_invitation(body)
+  result = api_instance.add_invitaion(body)
   p result
 rescue CammioAPI::ApiError => e
-  puts "Exception when calling InvitationsApi->add_invitation: #{e}"
+  puts "Exception when calling InvitationsApi->add_invitaion: #{e}"
 end
 ```
 
@@ -77,7 +79,7 @@ With this resource, you can delete an invitation, which effectively un-invites a
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -132,7 +134,7 @@ With this resource you can get the details of an invitation.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -178,7 +180,7 @@ Name | Type | Description  | Notes
 
 ## get_invitations
 
-> Array&lt;Invitation&gt; get_invitations(opts)
+> Array&lt;InlineResponse2001&gt; get_invitations(opts)
 
 Returns the list of invitations
 
@@ -188,7 +190,7 @@ This resource returns all invitations within Cammio. When a candidate completes 
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -232,7 +234,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;Invitation&gt;**](Invitation.md)
+[**Array&lt;InlineResponse2001&gt;**](InlineResponse2001.md)
 
 ### Authorization
 

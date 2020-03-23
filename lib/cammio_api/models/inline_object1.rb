@@ -20,6 +20,10 @@ module CammioAPI
 
     attr_accessor :candidate
 
+    attr_accessor :interviewer
+
+    attr_accessor :guests
+
     attr_accessor :callback_params
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -28,6 +32,8 @@ module CammioAPI
         :'template_id' => :'template_id',
         :'scheduled' => :'scheduled',
         :'candidate' => :'candidate',
+        :'interviewer' => :'interviewer',
+        :'guests' => :'guests',
         :'callback_params' => :'callback_params'
       }
     end
@@ -38,6 +44,8 @@ module CammioAPI
         :'template_id' => :'Integer',
         :'scheduled' => :'DateTime',
         :'candidate' => :'Candidate',
+        :'interviewer' => :'Interviewer',
+        :'guests' => :'Array<Guest>',
         :'callback_params' => :'InvitationsCallbackParams'
       }
     end
@@ -73,6 +81,16 @@ module CammioAPI
 
       if attributes.key?(:'candidate')
         self.candidate = attributes[:'candidate']
+      end
+
+      if attributes.key?(:'interviewer')
+        self.interviewer = attributes[:'interviewer']
+      end
+
+      if attributes.key?(:'guests')
+        if (value = attributes[:'guests']).is_a?(Array)
+          self.guests = value
+        end
       end
 
       if attributes.key?(:'callback_params')
@@ -116,6 +134,8 @@ module CammioAPI
           template_id == o.template_id &&
           scheduled == o.scheduled &&
           candidate == o.candidate &&
+          interviewer == o.interviewer &&
+          guests == o.guests &&
           callback_params == o.callback_params
     end
 
@@ -128,7 +148,7 @@ module CammioAPI
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [template_id, scheduled, candidate, callback_params].hash
+      [template_id, scheduled, candidate, interviewer, guests, callback_params].hash
     end
 
     # Builds the object from hash

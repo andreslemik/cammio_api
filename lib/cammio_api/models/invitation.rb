@@ -17,22 +17,25 @@ module CammioAPI
   class Invitation
     attr_accessor :id
 
-    attr_accessor :scheduled
+    attr_accessor :template_id
 
-    attr_accessor :url
+    attr_accessor :scheduled
 
     attr_accessor :candidate
 
-    attr_accessor :template
+    attr_accessor :interviewer
+
+    attr_accessor :guests
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
+        :'template_id' => :'template_id',
         :'scheduled' => :'scheduled',
-        :'url' => :'url',
         :'candidate' => :'candidate',
-        :'template' => :'template'
+        :'interviewer' => :'interviewer',
+        :'guests' => :'guests'
       }
     end
 
@@ -40,10 +43,11 @@ module CammioAPI
     def self.openapi_types
       {
         :'id' => :'Integer',
+        :'template_id' => :'Integer',
         :'scheduled' => :'DateTime',
-        :'url' => :'String',
-        :'candidate' => :'Candidate',
-        :'template' => :'Template'
+        :'candidate' => :'InlineResponse2005',
+        :'interviewer' => :'InlineResponse2005',
+        :'guests' => :'Array<InlineResponse2005>'
       }
     end
 
@@ -72,20 +76,26 @@ module CammioAPI
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'scheduled')
-        self.scheduled = attributes[:'scheduled']
+      if attributes.key?(:'template_id')
+        self.template_id = attributes[:'template_id']
       end
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'scheduled')
+        self.scheduled = attributes[:'scheduled']
       end
 
       if attributes.key?(:'candidate')
         self.candidate = attributes[:'candidate']
       end
 
-      if attributes.key?(:'template')
-        self.template = attributes[:'template']
+      if attributes.key?(:'interviewer')
+        self.interviewer = attributes[:'interviewer']
+      end
+
+      if attributes.key?(:'guests')
+        if (value = attributes[:'guests']).is_a?(Array)
+          self.guests = value
+        end
       end
     end
 
@@ -108,10 +118,11 @@ module CammioAPI
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          template_id == o.template_id &&
           scheduled == o.scheduled &&
-          url == o.url &&
           candidate == o.candidate &&
-          template == o.template
+          interviewer == o.interviewer &&
+          guests == o.guests
     end
 
     # @see the `==` method
@@ -123,7 +134,7 @@ module CammioAPI
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, scheduled, url, candidate, template].hash
+      [id, template_id, scheduled, candidate, interviewer, guests].hash
     end
 
     # Builds the object from hash

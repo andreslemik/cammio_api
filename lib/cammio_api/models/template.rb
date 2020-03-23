@@ -23,6 +23,30 @@ module CammioAPI
 
     attr_accessor :type
 
+    attr_accessor :reference_id
+
+    attr_accessor :redirect_url
+
+    # Values are seconds 
+    attr_accessor :answer_time
+
+    # 0 means autostart, -1 means unlimited 
+    attr_accessor :max_recordings
+
+    # Values are days 
+    attr_accessor :expires_after
+
+    # Values are days 
+    attr_accessor :data_retention
+
+    attr_accessor :private
+
+    attr_accessor :continuous
+
+    attr_accessor :prohibit_playback
+
+    attr_accessor :allow_text_answers
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -51,7 +75,17 @@ module CammioAPI
         :'id' => :'id',
         :'title' => :'title',
         :'language' => :'language',
-        :'type' => :'type'
+        :'type' => :'type',
+        :'reference_id' => :'reference_id',
+        :'redirect_url' => :'redirect_url',
+        :'answer_time' => :'answer_time',
+        :'max_recordings' => :'max_recordings',
+        :'expires_after' => :'expires_after',
+        :'data_retention' => :'data_retention',
+        :'private' => :'private',
+        :'continuous' => :'continuous',
+        :'prohibit_playback' => :'prohibit_playback',
+        :'allow_text_answers' => :'allow_text_answers'
       }
     end
 
@@ -61,7 +95,17 @@ module CammioAPI
         :'id' => :'Integer',
         :'title' => :'String',
         :'language' => :'String',
-        :'type' => :'String'
+        :'type' => :'String',
+        :'reference_id' => :'String',
+        :'redirect_url' => :'String',
+        :'answer_time' => :'Integer',
+        :'max_recordings' => :'Integer',
+        :'expires_after' => :'Integer',
+        :'data_retention' => :'Integer',
+        :'private' => :'Boolean',
+        :'continuous' => :'Boolean',
+        :'prohibit_playback' => :'Boolean',
+        :'allow_text_answers' => :'Boolean'
       }
     end
 
@@ -101,12 +145,80 @@ module CammioAPI
       if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
+
+      if attributes.key?(:'reference_id')
+        self.reference_id = attributes[:'reference_id']
+      end
+
+      if attributes.key?(:'redirect_url')
+        self.redirect_url = attributes[:'redirect_url']
+      end
+
+      if attributes.key?(:'answer_time')
+        self.answer_time = attributes[:'answer_time']
+      else
+        self.answer_time = ANSWER_TIME.N60
+      end
+
+      if attributes.key?(:'max_recordings')
+        self.max_recordings = attributes[:'max_recordings']
+      else
+        self.max_recordings = MAX_RECORDINGS.N2
+      end
+
+      if attributes.key?(:'expires_after')
+        self.expires_after = attributes[:'expires_after']
+      else
+        self.expires_after = 60
+      end
+
+      if attributes.key?(:'data_retention')
+        self.data_retention = attributes[:'data_retention']
+      else
+        self.data_retention = 365
+      end
+
+      if attributes.key?(:'private')
+        self.private = attributes[:'private']
+      else
+        self.private = false
+      end
+
+      if attributes.key?(:'continuous')
+        self.continuous = attributes[:'continuous']
+      else
+        self.continuous = false
+      end
+
+      if attributes.key?(:'prohibit_playback')
+        self.prohibit_playback = attributes[:'prohibit_playback']
+      else
+        self.prohibit_playback = false
+      end
+
+      if attributes.key?(:'allow_text_answers')
+        self.allow_text_answers = attributes[:'allow_text_answers']
+      else
+        self.allow_text_answers = false
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@expires_after.nil? && @expires_after > 365
+        invalid_properties.push('invalid value for "expires_after", must be smaller than or equal to 365.')
+      end
+
+      if !@expires_after.nil? && @expires_after < 1
+        invalid_properties.push('invalid value for "expires_after", must be greater than or equal to 1.')
+      end
+
+      if !@data_retention.nil? && @data_retention < 1
+        invalid_properties.push('invalid value for "data_retention", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -117,6 +229,13 @@ module CammioAPI
       return false unless language_validator.valid?(@language)
       type_validator = EnumAttributeValidator.new('String', ["automated", "live", "pitch"])
       return false unless type_validator.valid?(@type)
+      answer_time_validator = EnumAttributeValidator.new('Integer', [30, 60, 120, 180, 240, 300, 600])
+      return false unless answer_time_validator.valid?(@answer_time)
+      max_recordings_validator = EnumAttributeValidator.new('Integer', [-1, 0, 1, 2, 3, 4, 5])
+      return false unless max_recordings_validator.valid?(@max_recordings)
+      return false if !@expires_after.nil? && @expires_after > 365
+      return false if !@expires_after.nil? && @expires_after < 1
+      return false if !@data_retention.nil? && @data_retention < 1
       true
     end
 
@@ -140,6 +259,50 @@ module CammioAPI
       @type = type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] answer_time Object to be assigned
+    def answer_time=(answer_time)
+      validator = EnumAttributeValidator.new('Integer', [30, 60, 120, 180, 240, 300, 600])
+      unless validator.valid?(answer_time)
+        fail ArgumentError, "invalid value for \"answer_time\", must be one of #{validator.allowable_values}."
+      end
+      @answer_time = answer_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] max_recordings Object to be assigned
+    def max_recordings=(max_recordings)
+      validator = EnumAttributeValidator.new('Integer', [-1, 0, 1, 2, 3, 4, 5])
+      unless validator.valid?(max_recordings)
+        fail ArgumentError, "invalid value for \"max_recordings\", must be one of #{validator.allowable_values}."
+      end
+      @max_recordings = max_recordings
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] expires_after Value to be assigned
+    def expires_after=(expires_after)
+      if !expires_after.nil? && expires_after > 365
+        fail ArgumentError, 'invalid value for "expires_after", must be smaller than or equal to 365.'
+      end
+
+      if !expires_after.nil? && expires_after < 1
+        fail ArgumentError, 'invalid value for "expires_after", must be greater than or equal to 1.'
+      end
+
+      @expires_after = expires_after
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] data_retention Value to be assigned
+    def data_retention=(data_retention)
+      if !data_retention.nil? && data_retention < 1
+        fail ArgumentError, 'invalid value for "data_retention", must be greater than or equal to 1.'
+      end
+
+      @data_retention = data_retention
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -148,7 +311,17 @@ module CammioAPI
           id == o.id &&
           title == o.title &&
           language == o.language &&
-          type == o.type
+          type == o.type &&
+          reference_id == o.reference_id &&
+          redirect_url == o.redirect_url &&
+          answer_time == o.answer_time &&
+          max_recordings == o.max_recordings &&
+          expires_after == o.expires_after &&
+          data_retention == o.data_retention &&
+          private == o.private &&
+          continuous == o.continuous &&
+          prohibit_playback == o.prohibit_playback &&
+          allow_text_answers == o.allow_text_answers
     end
 
     # @see the `==` method
@@ -160,7 +333,7 @@ module CammioAPI
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, title, language, type].hash
+      [id, title, language, type, reference_id, redirect_url, answer_time, max_recordings, expires_after, data_retention, private, continuous, prohibit_playback, allow_text_answers].hash
     end
 
     # Builds the object from hash

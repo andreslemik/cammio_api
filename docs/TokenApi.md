@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## get_access_token
 
-> InlineResponse200 get_access_token(inline_object)
+> InlineResponse200 get_access_token(assertion)
 
 Get an access token
 
@@ -20,14 +20,14 @@ With this resource, you can request an access token. You will need to generate a
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 
 api_instance = CammioAPI::TokenApi.new
-inline_object = CammioAPI::InlineObject.new # InlineObject | 
+assertion = 'assertion_example' # String | 
 
 begin
   #Get an access token
-  result = api_instance.get_access_token(inline_object)
+  result = api_instance.get_access_token(assertion)
   p result
 rescue CammioAPI::ApiError => e
   puts "Exception when calling TokenApi->get_access_token: #{e}"
@@ -39,7 +39,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **inline_object** | [**InlineObject**](InlineObject.md)|  | 
+ **assertion** | **String**|  | 
 
 ### Return type
 
@@ -51,6 +51,6 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data, application/json
 - **Accept**: application/json
 

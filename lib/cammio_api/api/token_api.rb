@@ -21,26 +21,26 @@ module CammioAPI
     end
     # Get an access token
     # With this resource, you can request an access token. You will need to generate a JWT request token first, and post this in the message body. 
-    # @param inline_object [InlineObject] 
+    # @param assertion [String] 
     # @param [Hash] opts the optional parameters
     # @return [InlineResponse200]
-    def get_access_token(inline_object, opts = {})
-      data, _status_code, _headers = get_access_token_with_http_info(inline_object, opts)
+    def get_access_token(assertion, opts = {})
+      data, _status_code, _headers = get_access_token_with_http_info(assertion, opts)
       data
     end
 
     # Get an access token
     # With this resource, you can request an access token. You will need to generate a JWT request token first, and post this in the message body. 
-    # @param inline_object [InlineObject] 
+    # @param assertion [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(InlineResponse200, Integer, Hash)>] InlineResponse200 data, response status code and response headers
-    def get_access_token_with_http_info(inline_object, opts = {})
+    def get_access_token_with_http_info(assertion, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TokenApi.get_access_token ...'
       end
-      # verify the required parameter 'inline_object' is set
-      if @api_client.config.client_side_validation && inline_object.nil?
-        fail ArgumentError, "Missing the required parameter 'inline_object' when calling TokenApi.get_access_token"
+      # verify the required parameter 'assertion' is set
+      if @api_client.config.client_side_validation && assertion.nil?
+        fail ArgumentError, "Missing the required parameter 'assertion' when calling TokenApi.get_access_token"
       end
       # resource path
       local_var_path = '/token'
@@ -53,13 +53,14 @@ module CammioAPI
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data', 'application/json'])
 
       # form parameters
       form_params = opts[:form_params] || {}
+      form_params['assertion'] = assertion
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(inline_object) 
+      post_body = opts[:body] 
 
       # return_type
       return_type = opts[:return_type] || 'InlineResponse200' 

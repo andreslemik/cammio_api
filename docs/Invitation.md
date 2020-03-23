@@ -5,10 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** |  | [optional] 
+**template_id** | **Integer** |  | [optional] 
 **scheduled** | **DateTime** |  | [optional] 
-**url** | **String** |  | [optional] 
-**candidate** | [**Candidate**](Candidate.md) |  | [optional] 
-**template** | [**Template**](Template.md) |  | [optional] 
+**candidate** | [**InlineResponse2005**](InlineResponse2005.md) |  | [optional] 
+**interviewer** | [**InlineResponse2005**](InlineResponse2005.md) |  | [optional] 
+**guests** | [**Array&lt;InlineResponse2005&gt;**](InlineResponse2005.md) |  | [optional] 
 
 ## Code Sample
 
@@ -16,10 +17,11 @@ Name | Type | Description | Notes
 require 'CammioAPI'
 
 instance = CammioAPI::Invitation.new(id: null,
+                                 template_id: null,
                                  scheduled: null,
-                                 url: null,
                                  candidate: null,
-                                 template: null)
+                                 interviewer: null,
+                                 guests: null)
 ```
 
 

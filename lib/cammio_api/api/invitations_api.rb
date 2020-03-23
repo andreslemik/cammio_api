@@ -20,25 +20,27 @@ module CammioAPI
       @api_client = api_client
     end
     # Invite a candidate for a video interview
+    # With this resource you can invite a candidate for a video interview by posting a message body. The response contains the URL to start the interview. You may set any number of **callback params**, but this is not required. Callback params are used upon notifying an external system, and can hold any kind of information, for example the ID of an external job application. 
     # @param body [InlineObject1] 
     # @param [Hash] opts the optional parameters
     # @return [Invitation]
-    def add_invitation(body, opts = {})
-      data, _status_code, _headers = add_invitation_with_http_info(body, opts)
+    def add_invitaion(body, opts = {})
+      data, _status_code, _headers = add_invitaion_with_http_info(body, opts)
       data
     end
 
     # Invite a candidate for a video interview
+    # With this resource you can invite a candidate for a video interview by posting a message body. The response contains the URL to start the interview. You may set any number of **callback params**, but this is not required. Callback params are used upon notifying an external system, and can hold any kind of information, for example the ID of an external job application. 
     # @param body [InlineObject1] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Invitation, Integer, Hash)>] Invitation data, response status code and response headers
-    def add_invitation_with_http_info(body, opts = {})
+    def add_invitaion_with_http_info(body, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: InvitationsApi.add_invitation ...'
+        @api_client.config.logger.debug 'Calling API: InvitationsApi.add_invitaion ...'
       end
       # verify the required parameter 'body' is set
       if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling InvitationsApi.add_invitation"
+        fail ArgumentError, "Missing the required parameter 'body' when calling InvitationsApi.add_invitaion"
       end
       # resource path
       local_var_path = '/invitations'
@@ -76,7 +78,7 @@ module CammioAPI
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InvitationsApi#add_invitation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InvitationsApi#add_invitaion\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -214,7 +216,7 @@ module CammioAPI
     # @option opts [String] :email Query by email
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return. (default to 10)
-    # @return [Array<Invitation>]
+    # @return [Array<InlineResponse2001>]
     def get_invitations(opts = {})
       data, _status_code, _headers = get_invitations_with_http_info(opts)
       data
@@ -229,7 +231,7 @@ module CammioAPI
     # @option opts [String] :email Query by email
     # @option opts [Integer] :offset The number of items to skip before starting to collect the result set.
     # @option opts [Integer] :limit The numbers of items to return.
-    # @return [Array<(Array<Invitation>, Integer, Hash)>] Array<Invitation> data, response status code and response headers
+    # @return [Array<(Array<InlineResponse2001>, Integer, Hash)>] Array<InlineResponse2001> data, response status code and response headers
     def get_invitations_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InvitationsApi.get_invitations ...'
@@ -270,7 +272,7 @@ module CammioAPI
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'Array<Invitation>' 
+      return_type = opts[:return_type] || 'Array<InlineResponse2001>' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['basicAuth', 'bearerAuth']

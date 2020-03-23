@@ -33,7 +33,7 @@ With this resource, you can delete a video interview. Use this resource with cau
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -88,7 +88,7 @@ Deletes a review by ID for this interview. Use with caution!
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -145,7 +145,7 @@ Deletes a reviewer by ID for this interview. Use with caution!
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -202,7 +202,7 @@ This resource returns the big five personality profile, if available.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -258,7 +258,7 @@ With this resource, you can get the details of a completed video interview, incl
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -314,7 +314,7 @@ Get the player embed code for the interview. This code can be used to add a play
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -370,7 +370,7 @@ Get the details for the selected review.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -428,7 +428,7 @@ Returns a reviewer by ID for this interview.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -486,7 +486,7 @@ This resource returns a list of reviewers for this interview.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -542,7 +542,7 @@ Returns a list of reviews for the interview
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -588,7 +588,7 @@ Name | Type | Description  | Notes
 
 ## get_interviews
 
-> Array&lt;InlineResponse2001&gt; get_interviews(opts)
+> Array&lt;InlineResponse2002&gt; get_interviews(opts)
 
 Returns a list of interviews
 
@@ -598,7 +598,7 @@ This resource returns a list of all completed video interviews. All parameters a
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -642,7 +642,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;InlineResponse2001&gt;**](InlineResponse2001.md)
+[**Array&lt;InlineResponse2002&gt;**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -656,7 +656,7 @@ Name | Type | Description  | Notes
 
 ## get_video_cv_link
 
-> InlineResponse2002 get_video_cv_link(interview_id)
+> InlineResponse2003 get_video_cv_link(interview_id)
 
 Get a video CV link
 
@@ -666,7 +666,7 @@ Get a video CV link for a completed interview. This link to the video interview 
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -698,7 +698,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -722,7 +722,7 @@ Add a review for the interview. A review consists of a rating and remarks.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth
@@ -780,7 +780,7 @@ Invite a reviewer to review the interview.
 
 ```ruby
 # load the gem
-require 'Cammio API'
+require 'cammio_api'
 # setup authorization
 CammioAPI.configure do |config|
   # Configure HTTP basic authorization: basicAuth

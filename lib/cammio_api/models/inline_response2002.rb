@@ -14,19 +14,39 @@ require 'date'
 
 module CammioAPI
   class InlineResponse2002
-    attr_accessor :url
+    attr_accessor :id
+
+    attr_accessor :template_name
+
+    attr_accessor :candidate_name
+
+    attr_accessor :completed
+
+    attr_accessor :thumb_url
+
+    attr_accessor :still_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'url'
+        :'id' => :'id',
+        :'template_name' => :'template_name',
+        :'candidate_name' => :'candidate_name',
+        :'completed' => :'completed',
+        :'thumb_url' => :'thumb_url',
+        :'still_url' => :'still_url'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'url' => :'String'
+        :'id' => :'Integer',
+        :'template_name' => :'String',
+        :'candidate_name' => :'String',
+        :'completed' => :'DateTime',
+        :'thumb_url' => :'String',
+        :'still_url' => :'String'
       }
     end
 
@@ -51,8 +71,28 @@ module CammioAPI
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'template_name')
+        self.template_name = attributes[:'template_name']
+      end
+
+      if attributes.key?(:'candidate_name')
+        self.candidate_name = attributes[:'candidate_name']
+      end
+
+      if attributes.key?(:'completed')
+        self.completed = attributes[:'completed']
+      end
+
+      if attributes.key?(:'thumb_url')
+        self.thumb_url = attributes[:'thumb_url']
+      end
+
+      if attributes.key?(:'still_url')
+        self.still_url = attributes[:'still_url']
       end
     end
 
@@ -74,7 +114,12 @@ module CammioAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          url == o.url
+          id == o.id &&
+          template_name == o.template_name &&
+          candidate_name == o.candidate_name &&
+          completed == o.completed &&
+          thumb_url == o.thumb_url &&
+          still_url == o.still_url
     end
 
     # @see the `==` method
@@ -86,7 +131,7 @@ module CammioAPI
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url].hash
+      [id, template_name, candidate_name, completed, thumb_url, still_url].hash
     end
 
     # Builds the object from hash
