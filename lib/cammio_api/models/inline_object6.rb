@@ -97,7 +97,7 @@ module CammioAPI
       if attributes.key?(:'answer_time')
         self.answer_time = attributes[:'answer_time']
       else
-        self.answer_time = ANSWER_TIME.N60
+        self.answer_time = 60
       end
 
       if attributes.key?(:'video')

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **Integer** |  | [optional] 
 **text** | **String** |  | [optional] 
 **index** | **Integer** |  | [optional] 
-**answer_time** | **Integer** | Values are seconds  | [optional] [default to ANSWER_TIME.N120]
+**answer_time** | **Integer** | Values are seconds  | [optional] [default to 120]
 
 ## Code Sample
 

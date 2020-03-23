@@ -157,13 +157,13 @@ module CammioAPI
       if attributes.key?(:'answer_time')
         self.answer_time = attributes[:'answer_time']
       else
-        self.answer_time = ANSWER_TIME.N60
+        self.answer_time = 60
       end
 
       if attributes.key?(:'max_recordings')
         self.max_recordings = attributes[:'max_recordings']
       else
-        self.max_recordings = MAX_RECORDINGS.N2
+        self.max_recordings = 2
       end
 
       if attributes.key?(:'expires_after')

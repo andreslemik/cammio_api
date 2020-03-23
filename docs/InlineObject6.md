@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **template_id** | **Integer** |  | 
 **text** | **String** |  | 
-**answer_time** | **Integer** | Values are seconds  | [optional] [default to ANSWER_TIME.N60]
+**answer_time** | **Integer** | Values are seconds  | [optional] [default to 60]
 **video** | **File** |  | [optional] 
 
 ## Code Sample

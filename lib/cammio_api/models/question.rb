@@ -101,7 +101,7 @@ module CammioAPI
       if attributes.key?(:'answer_time')
         self.answer_time = attributes[:'answer_time']
       else
-        self.answer_time = ANSWER_TIME.N120
+        self.answer_time = 120
       end
     end
 
