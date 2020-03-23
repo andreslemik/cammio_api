@@ -24,8 +24,8 @@ module CammioAPI
     # @param body [InlineObject1] 
     # @param [Hash] opts the optional parameters
     # @return [Invitation]
-    def add_invitaion(body, opts = {})
-      data, _status_code, _headers = add_invitaion_with_http_info(body, opts)
+    def add_invitation(body, opts = {})
+      data, _status_code, _headers = add_invitation_with_http_info(body, opts)
       data
     end
 
@@ -34,13 +34,13 @@ module CammioAPI
     # @param body [InlineObject1] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Invitation, Integer, Hash)>] Invitation data, response status code and response headers
-    def add_invitaion_with_http_info(body, opts = {})
+    def add_invitation_with_http_info(body, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: InvitationsApi.add_invitaion ...'
+        @api_client.config.logger.debug 'Calling API: InvitationsApi.add_invitation ...'
       end
       # verify the required parameter 'body' is set
       if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling InvitationsApi.add_invitaion"
+        fail ArgumentError, "Missing the required parameter 'body' when calling InvitationsApi.add_invitation"
       end
       # resource path
       local_var_path = '/invitations'
@@ -78,7 +78,7 @@ module CammioAPI
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InvitationsApi#add_invitaion\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InvitationsApi#add_invitation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
