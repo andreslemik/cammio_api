@@ -287,7 +287,8 @@ module CammioAPI
       end
 
       if !expires_after.nil? && expires_after < 1
-        fail ArgumentError, 'invalid value for "expires_after", must be greater than or equal to 1.'
+        # fail ArgumentError, 'invalid value for "expires_after", must be greater than or equal to 1.'
+        expires_after = 14
       end
 
       @expires_after = expires_after
