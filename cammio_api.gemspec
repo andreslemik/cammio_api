@@ -24,13 +24,15 @@ Gem::Specification.new do |s|
   s.homepage    = "https://openapi-generator.tech"
   s.summary     = "Cammio REST API Ruby Gem"
   s.description = <<-EOF
-    ## Introduction This is the *live* documentation for the Cammio API.
+    ## Introduction
+    This is the *live* documentation for the Cammio API.
     You use the API to invite candidates for a video interview.
     You can also retrieve information on completed video interviews.
     The API gives access to answer video streams which can be used in a custom video player.
     You may also request a *video CV* link with the API.
 
-    ## Notifications With notifications, ATS partners can be notified in real-time when
+    ## Notifications
+    With notifications, ATS partners can be notified in real-time when
     candidates complete video interviews. Cammio supports both REST and SOAP/WSDL interfaces as call
     back methods. The parameters used for the callback can be defined by the ATS partner.
     Notifications can only be used when invitations have been created with the Cammio API.
@@ -41,7 +43,8 @@ Gem::Specification.new do |s|
     It is not necessary to use the notification system. ATS partners can also ‘poll’ the Cammio API to
     look for new values.
 
-    ## Authorization Click on the triangle below to see the authorization information."
+    ## Authorization
+    Click on the triangle below to see the authorization information."
     EOF
   s.license = "WTFPL"
   s.required_ruby_version = ">= 1.9"
