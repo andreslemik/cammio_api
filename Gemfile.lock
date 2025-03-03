@@ -36,7 +36,6 @@ GEM
       pry (>= 0.13, < 0.15)
     racc (1.8.1)
     rainbow (3.1.1)
-    rake (13.2.1)
     regexp_parser (2.10.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
@@ -79,8 +78,7 @@ DEPENDENCIES
   bundle-audit
   cammio_api!
   pry-byebug
-  rake
-  rspec (~> 3.6, >= 3.6.0)
+  rspec (~> 3.6, >= 3.13.0)
   rubocop
 
 BUNDLED WITH
