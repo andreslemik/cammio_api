@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
     Click on the triangle below to see the authorization information."
     EOF
   s.license = "WTFPL"
-  s.required_ruby_version = ">= 1.9"
+  s.required_ruby_version = ">= 3.3"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.4'
   s.add_runtime_dependency 'json', '~> 2.13'
