@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 3.3"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.4'
-  s.add_runtime_dependency 'json', '~> 2.13'
+  s.add_runtime_dependency 'json', '>= 2.13', '< 4.0'
 
   s.add_development_dependency 'rspec', '~> 3.13'
   s.add_development_dependency 'bundle-audit'
